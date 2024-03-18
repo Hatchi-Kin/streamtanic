@@ -62,9 +62,8 @@ if submit_button:
 
     # Use markdown to display the prediction result
     st.markdown(f"## The prediction is: {response.json()['prediction'][0]}")
-    # Create a delay
-    time.sleep(1)
 
+    time.sleep(1.5)
     if response.json()["prediction"][0] == 1:
         st.markdown("### which is good")
     else:
