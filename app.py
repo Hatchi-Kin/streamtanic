@@ -3,7 +3,7 @@ import requests
 import time
 
 
-base_url = "http://0.0.0.0:8000/"
+base_url = st.secrets["BASE_URL"]
 
 # Set the title and prevent line breaks
 st.markdown(
