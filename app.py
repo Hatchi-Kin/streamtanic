@@ -3,7 +3,7 @@ import requests
 import time
 
 
-base_url = st.secrets["BASE_URL"]
+base_url = "http://0.0.0.0:8000/"
 
 # Set the title and prevent line breaks
 st.markdown(
@@ -58,13 +58,19 @@ if submit_button:
         "Embarked": Embarked,
     }
 
-    response = requests.post(url, json=data)
+    try:
+        response = requests.post(url, json=data)
+        response.raise_for_status()  # Raise an exception if the request was unsuccessful
 
-    # Use markdown to display the prediction result
-    st.markdown(f"## The prediction is: {response.json()['prediction'][0]}")
+        # Use markdown to display the prediction result
+        st.markdown(f"## The prediction is: {response.json()['prediction'][0]}")
+        # Create a delay
+        time.sleep(1)
 
-    time.sleep(1.5)
-    if response.json()["prediction"][0] == 1:
-        st.markdown("### which is good")
-    else:
-        st.markdown("### which is sad")
+        if response.json()["prediction"][0] == 1:
+            st.markdown("### which is good")
+        else:
+            st.markdown("### which is sad")
+
+    except requests.exceptions.RequestException:
+        st.write("Error connecting to API")
