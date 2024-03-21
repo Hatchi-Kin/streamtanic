@@ -4,7 +4,7 @@ import time
 
 
 base_url = st.secrets["BASE_URL"]
-
+API_TOKEN = st.secrets["API_TOKEN"]
 # Set the title and prevent line breaks
 st.markdown(
     "<h1 style='white-space: nowrap;'>Titanic Survival Prediction</h1>",
@@ -58,8 +58,12 @@ if submit_button:
         "Embarked": Embarked,
     }
 
+    headers = {
+        "Authorization": f"Bearer {API_TOKEN}"
+    }
+
     try:
-        response = requests.post(url, json=data)
+        response = requests.post(url, json=data, headers=headers)
         response.raise_for_status()  # Raise an exception if the request was unsuccessful
 
         # Use markdown to display the prediction result
