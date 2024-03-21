@@ -19,7 +19,7 @@ password = st.text_input('Password', type='password')
 
 # Get the token
 def get_token(username, password):
-    response = requests.post(f'{base_url}/token', data={'username': username, 'password': password})
+    response = requests.post(f'{base_url}token', data={'username': username, 'password': password})
     token = response.json()['access_token']
     return token
 
