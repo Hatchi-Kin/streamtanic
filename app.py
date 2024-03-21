@@ -3,6 +3,8 @@ import requests
 import time
 
 base_url = st.secrets["BASE_URL"]
+username = st.secrets["username"]
+password = st.secrets["password"]
 
 # Set the title and prevent line breaks
 st.markdown(
@@ -12,10 +14,6 @@ st.markdown(
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     st.image("titanic.jpeg", width=int(600 * 0.6))
-
-# Let the user input the username and password
-username = st.text_input('Username')
-password = st.text_input('Password', type='password')
 
 # Get the token
 def get_token(username, password):
